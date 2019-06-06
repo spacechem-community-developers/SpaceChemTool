@@ -1,18 +1,40 @@
 # SpaceChemTool (SCT for friends)
 
-This repository contains the tool used for all the SpaceChem Tournaments after 2015.  
-To download it use the `Clone or download` -> `Download ZIP` button over there.
+SpaceChemTool is a tool for import and exporting SpaceChem puzzle solutions. It aims to:
 
-In addition to the SCT, solvers will need puzzle directories, provided by the host:
+* Minimize the time spent reproducing solutions
+* Provide solvers and results video with graphical aids for additional restrictions (atom barriers, no waldo zones etc.)
+* Provide solvers with a complete set of solutions for each completed round
 
-Each directory contains material for a round of the tournament:
+The tool was used for all the SpaceChem Tournaments after 2015.  
+
+### Typical usage for round 1
+1. Download the tool using the `Clone or download` -> `Download ZIP` button over there
+2. Open config.txt and replace Solver with your name in the USER=... line
+3. Open command prompt (cmd.exe) and go to the tool directory
+4. Run `build_windows.bat` (or `build_nix.sh`) to generate the .exe
+5. Get the first round from the host and copy it into the tool directory
+6. Run `SpaceChemTool play round1`
+7. Solve the puzzles
+8. Run `SpaceChemTool export round1` or `SpaceChemTool export <puzzle_name>` and send the exportedXXX.txt file generated
+   (see output from the tool for the filename) to the host
+9. Wait for results to be published
+10. Run `SpaceChemTool import round1`
+11. Look at everyone's solutions in game
+
+
+### Typical usage for other rounds
+* Steps 5-11 as above with new round and puzzle names
+
+## Puzzle directories
+Each puzzle directory (`round1..N`) is provided by the host and contains material for a round of the tournament:
 * `*.puzzle` are the puzzles
 * `*.images` are reactor image patches for puzzles that have restrictions e.g.
     * barriers that atoms cannot pass through
     * cells that waldos cannot enter
 * `solutions.txt` contains exported solutions - this will be overwritten when multiple exports of a round are performed. This is likely to be changed in a later version of the tool.
 
-The root directory contains:
+## Content of the tool directory
 * `build_windows.bat` - batch file to build SpaceChemTool.exe on Windows
 * `build_nix.sh` - sh script to build SpaceChemTool.exe on MacOSX/Linux
 * `SpaceChemTool.exe` - the tool for importing/exporting puzzles and solutions (present after compilation)
@@ -22,7 +44,7 @@ The root directory contains:
 * `sqlite3.dll` - Used by System.Data.SQLite.dll on Windows (Mac/Linux users should already have a version of this installed)
 * `*.tex` - images for reactor features
 
-The config file specifies:
+## Config file (`config.txt`)
 * `USER` - The solver's tournament username which should match their steam user name
 * `PLAYSAVE` - The name of the "Play" user and save file which the solver will use to solve the tournament puzzles.
                This must not be the name of an existing SpaceChem profile.
@@ -35,7 +57,7 @@ The tool SpaceChemTool needs to be run from a command prompt with this directory
 Using the tool while the game is running is not recommended.  
 Running the tool on OSX/Unix requires mono (prefix the following commands with mono).
 
-The commands:
+## SCT commands in detail
 ```
 SpaceChemTool.exe play [ROUND NAME]
 	This imports the puzzles for [ROUND NAME] into the "Play" save file and informs the solver which puzzles have reactor images available. If the "Play" user hasn't been added then it will be automatically added.
