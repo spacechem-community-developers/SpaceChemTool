@@ -1,0 +1,10 @@
+# VS dir
+.vs/
+
+# VS folders
+bin/
+obj/
+
+# generated exe and config file
+SpaceChemTool.exe
+config.txt
